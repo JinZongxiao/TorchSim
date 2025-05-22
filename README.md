@@ -118,7 +118,7 @@ torchsim/
 ```
 
 ## Documentation
-[Read the doc](https://google.com)
+[Read the doc](https://torchsim.readthedocs.io/en/latest/)
 
 ## Cite
 ```
