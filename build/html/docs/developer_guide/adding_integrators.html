@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adding New Integrators &mdash; TorchSim v0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fa47ad08"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Machine Learning Integration" href="ml_integration.html" />
+    <link rel="prev" title="Adding New Force Fields" href="adding_force_fields.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TorchSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">TorchSim Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#navigation">Navigation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#from-source">From Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#development-installation">Development Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#verifying-installation">Verifying Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#basic-lennard-jones-simulation">Basic Lennard-Jones Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#machine-learning-potential-simulation">Machine Learning Potential Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-configuration-files">Using Configuration Files</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/index.html#contents">Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/input_files.html">Input File Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#xyz-format">XYZ Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#custom-file-formats">Custom File Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#input-file-parameters">Input File Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#converting-between-formats">Converting Between Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/force_fields.html">Force Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#lennard-jones-force-field">Lennard-Jones Force Field</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/force_fields.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/force_fields.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#machine-learning-potentials">Machine Learning Potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#combining-force-fields">Combining Force Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#custom-force-fields">Custom Force Fields</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/integrators.html">Integrators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#verlet-integrator">Verlet Integrator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/integrators.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/integrators.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#nve-ensemble">NVE Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#nvt-ensemble">NVT Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#custom-integrators">Custom Integrators</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/index.html#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/index.html#core-classes">Core Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference/core/md_simulation.html">MDSimulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#class-definition">Class Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#methods">Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#run">run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-xyz-trajectory">save_xyz_trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-energy-curve">save_energy_curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-temperature-curve">save_temperature_curve</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#example-usage">Example Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#properties">Properties</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#contents">Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#core-components">Core Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#atomreader">AtomReader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#force-fields">Force Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#integrators">Integrators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#mdmodel">MDModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#mdsimulator">MDSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#extension-points">Extension Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#pytorch-integration">PyTorch Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding_force_fields.html">Adding New Force Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#force-field-interface">Force Field Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#using-pytorch-autograd">Using PyTorch Autograd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#neighbor-lists">Neighbor Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#registering-your-force-field">Registering Your Force Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#example-simple-harmonic-potential">Example: Simple Harmonic Potential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#testing-your-force-field">Testing Your Force Field</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Adding New Integrators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#integrator-interface">Integrator Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-leap-frog-integrator">Example: Leap-Frog Integrator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-thermostats">Implementing Thermostats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#registering-your-integrator">Registering Your Integrator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-your-integrator">Testing Your Integrator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ml_integration.html">Machine Learning Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#basic-integration">Basic Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#supported-model-types">Supported Model Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#creating-a-custom-ml-model">Creating a Custom ML Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#registering-your-model">Registering Your Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#training-ml-models">Training ML Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#using-hybrid-potentials">Using Hybrid Potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="project_structure.html">Project Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#core-components">Core Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#core">core/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#io-utils">io_utils/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#machine-learning-potentials">machine_learning_potentials/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#run-scripts">run_scripts/</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#adding-new-components">Adding New Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#adding-a-new-force-field">Adding a New Force Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#adding-a-new-integrator">Adding a New Integrator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#adding-a-new-ml-model">Adding a New ML Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#coding-standards">Coding Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to TorchSim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#development-environment">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#project-structure">Project Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contribution-guidelines">Contribution Guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#pull-request-checklist">Pull Request Checklist</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#adding-new-features">Adding New Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#force-fields">Force Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#integrators">Integrators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#machine-learning-models">Machine Learning Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#reporting-bugs">Reporting Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#requesting-features">Requesting Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#code-of-conduct">Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#our-responsibilities">Our Responsibilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#testing-framework">Testing Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#writing-tests">Writing Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#test-file-structure">Test File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#test-categories">Test Categories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="testing.html#unit-tests">Unit Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing.html#integration-tests">Integration Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing.html#regression-tests">Regression Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#test-fixtures">Test Fixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#testing-gpu-code">Testing GPU Code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-data">Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#continuous-integration">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#code-coverage">Code Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#basic-examples">Basic Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#advanced-examples">Advanced Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#analysis-examples">Analysis Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#custom-extensions">Custom Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/lennard_jones_fluid.html">Lennard-Jones Fluid Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#complete-code">Complete Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#step-by-step-explanation">Step-by-Step Explanation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#setting-up-the-system">1. Setting Up the System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#initializing-torchsim-components">2. Initializing TorchSim Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#running-the-simulation">3. Running the Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#analyzing-the-results">4. Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#expected-results">Expected Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#variations">Variations</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TorchSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Adding New Integrators</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/developer_guide/adding_integrators.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adding-new-integrators">
+<h1>Adding New Integrators<a class="headerlink" href="#adding-new-integrators" title="Link to this heading"></a></h1>
+<p>This guide explains how to implement custom integrators in TorchSim by extending the <code class="docutils literal notranslate"><span class="pre">BaseIntegrator</span></code> class.</p>
+<section id="integrator-interface">
+<h2>Integrator Interface<a class="headerlink" href="#integrator-interface" title="Link to this heading"></a></h2>
+<p>All integrators in TorchSim must extend the <code class="docutils literal notranslate"><span class="pre">BaseIntegrator</span></code> class and implement the <code class="docutils literal notranslate"><span class="pre">step()</span></code> method, which:</p>
+<ol class="simple">
+<li><p>Updates atomic positions and velocities</p></li>
+<li><p>Returns the potential energy of the system</p></li>
+</ol>
+</section>
+<section id="basic-implementation">
+<h2>Basic Implementation<a class="headerlink" href="#basic-implementation" title="Link to this heading"></a></h2>
+<p>Here’s a template for implementing a custom integrator:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchsim.core.integrator.base_integrator</span> <span class="kn">import</span> <span class="n">BaseIntegrator</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="k">class</span> <span class="nc">MyCustomIntegrator</span><span class="p">(</span><span class="n">BaseIntegrator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom_reader</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">force_field</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the integrator.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        -----------</span>
+<span class="sd">        atom_reader : AtomFileReader</span>
+<span class="sd">            Reader containing atomic positions and other data</span>
+<span class="sd">        dt : float</span>
+<span class="sd">            Time step in picoseconds</span>
+<span class="sd">        force_field : BaseForce</span>
+<span class="sd">            Force field to use for force calculations</span>
+<span class="sd">        **kwargs : dict</span>
+<span class="sd">            Additional parameters specific to this integrator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">force_field</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Initialize custom parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param1</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;param1&#39;</span><span class="p">,</span> <span class="n">default_value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param2</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;param2&#39;</span><span class="p">,</span> <span class="n">default_value</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform one integration step.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">        --------</span>
+<span class="sd">        float</span>
+<span class="sd">            Potential energy of the system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Calculate forces at current positions</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_field</span><span class="o">.</span><span class="n">compute_forces</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate potential energy</span>
+        <span class="n">energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_field</span><span class="o">.</span><span class="n">compute_energy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        
+        <span class="c1"># Update positions and velocities according to your integration scheme</span>
+        <span class="c1"># Example (simple Euler integration):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocities</span> <span class="o">+=</span> <span class="n">forces</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocities</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+        
+        <span class="c1"># Apply periodic boundary conditions if needed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_pbc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">energy</span>
+</pre></div>
+</div>
+</section>
+<section id="example-leap-frog-integrator">
+<h2>Example: Leap-Frog Integrator<a class="headerlink" href="#example-leap-frog-integrator" title="Link to this heading"></a></h2>
+<p>Here’s an example implementation of the leap-frog integration algorithm:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchsim.core.integrator.base_integrator</span> <span class="kn">import</span> <span class="n">BaseIntegrator</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="k">class</span> <span class="nc">LeapFrogIntegrator</span><span class="p">(</span><span class="n">BaseIntegrator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom_reader</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">force_field</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">force_field</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Initialize velocities at t - dt/2 for leap-frog</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_field</span><span class="o">.</span><span class="n">compute_forces</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocities</span> <span class="o">-=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="n">forces</span>  <span class="c1"># v(t-dt/2)</span>
+        
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Calculate forces at current positions</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_field</span><span class="o">.</span><span class="n">compute_forces</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        
+        <span class="c1"># Update velocities to t + dt/2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocities</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="n">forces</span>  <span class="c1"># v(t+dt/2)</span>
+        
+        <span class="c1"># Update positions to t + dt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocities</span>
+        
+        <span class="c1"># Apply periodic boundary conditions if needed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_pbc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate potential energy</span>
+        <span class="n">energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_field</span><span class="o">.</span><span class="n">compute_energy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">energy</span>
+</pre></div>
+</div>
+</section>
+<section id="implementing-thermostats">
+<h2>Implementing Thermostats<a class="headerlink" href="#implementing-thermostats" title="Link to this heading"></a></h2>
+<p>To implement a thermostat for temperature control (NVT ensemble), you need to modify the velocities at each step:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NVTIntegrator</span><span class="p">(</span><span class="n">BaseIntegrator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom_reader</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">force_field</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">300.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">force_field</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="n">temperature</span>  <span class="c1"># Target temperature in Kelvin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span>              <span class="c1"># Friction coefficient</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kB</span> <span class="o">=</span> <span class="mf">8.3145e-3</span>             <span class="c1"># Boltzmann constant in appropriate units</span>
+        
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Calculate forces</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_field</span><span class="o">.</span><span class="n">compute_forces</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        
+        <span class="c1"># First part of velocity update</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocities</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="n">forces</span>
+        
+        <span class="c1"># Apply thermostat (Langevin dynamics)</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">)</span>
+        <span class="n">c2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">c1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">kB</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">masses</span><span class="p">)</span>
+        
+        <span class="c1"># Random thermal noise</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">velocities</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        
+        <span class="c1"># Update velocities with thermostat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocities</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocities</span> <span class="o">+</span> <span class="n">c2</span> <span class="o">*</span> <span class="n">noise</span>
+        
+        <span class="c1"># Update positions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocities</span>
+        
+        <span class="c1"># Apply periodic boundary conditions</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_pbc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate new forces and finish velocity update</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_field</span><span class="o">.</span><span class="n">compute_forces</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocities</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="n">forces</span>
+        
+        <span class="c1"># Calculate energy</span>
+        <span class="n">energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">force_field</span><span class="o">.</span><span class="n">compute_energy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">energy</span>
+</pre></div>
+</div>
+</section>
+<section id="registering-your-integrator">
+<h2>Registering Your Integrator<a class="headerlink" href="#registering-your-integrator" title="Link to this heading"></a></h2>
+<p>To make your integrator available to the rest of the system:</p>
+<ol class="simple">
+<li><p>Create a new file in the <code class="docutils literal notranslate"><span class="pre">torchsim/core/integrator/</span></code> directory</p></li>
+<li><p>Implement your integrator class</p></li>
+<li><p>Import your integrator in <code class="docutils literal notranslate"><span class="pre">torchsim/core/integrator/__init__.py</span></code></p></li>
+</ol>
+</section>
+<section id="testing-your-integrator">
+<h2>Testing Your Integrator<a class="headerlink" href="#testing-your-integrator" title="Link to this heading"></a></h2>
+<p>It’s important to test your integrator to ensure it behaves correctly:</p>
+<ol class="simple">
+<li><p>Test energy conservation for NVE integrators</p></li>
+<li><p>Test temperature stability for NVT integrators</p></li>
+<li><p>Compare with analytical solutions for simple systems</p></li>
+<li><p>Check long-term stability with extended simulations</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example test</span>
+<span class="n">atom_reader</span> <span class="o">=</span> <span class="n">AtomFileReader</span><span class="p">(</span><span class="s2">&quot;test_structure.xyz&quot;</span><span class="p">,</span> <span class="n">box_length</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">lj_force</span> <span class="o">=</span> <span class="n">LennardJonesForce</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">)</span>
+<span class="n">my_integrator</span> <span class="o">=</span> <span class="n">MyCustomIntegrator</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">force_field</span><span class="o">=</span><span class="n">lj_force</span><span class="p">)</span>
+
+<span class="c1"># Run a short simulation</span>
+<span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">my_integrator</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">energy</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+<span class="c1"># Check energy conservation (for NVE)</span>
+<span class="n">energy_std</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">energies</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Energy standard deviation: </span><span class="si">{</span><span class="n">energy_std</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Should be small for NVE </span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="adding_force_fields.html" class="btn btn-neutral float-left" title="Adding New Force Fields" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ml_integration.html" class="btn btn-neutral float-right" title="Machine Learning Integration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jin Zongxiao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

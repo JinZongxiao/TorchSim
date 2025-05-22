@@ -1,0 +1,9 @@
+sphinx>=4.0.0
+sphinx-rtd-theme>=1.0.0
+recommonmark>=0.7.1
+sphinx-markdown-tables>=0.0.15
+torch>=1.9.0
+torch-geometric>=2.0.0
+matplotlib>=3.3.0
+numpy>=1.19.0
+scipy>=1.6.0 

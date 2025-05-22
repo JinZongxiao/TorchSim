@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Structure &mdash; TorchSim v0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fa47ad08"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Contributing to TorchSim" href="contributing.html" />
+    <link rel="prev" title="Machine Learning Integration" href="ml_integration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TorchSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">TorchSim Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#navigation">Navigation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#from-source">From Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#development-installation">Development Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#verifying-installation">Verifying Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#basic-lennard-jones-simulation">Basic Lennard-Jones Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#machine-learning-potential-simulation">Machine Learning Potential Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-configuration-files">Using Configuration Files</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/index.html#contents">Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/input_files.html">Input File Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#xyz-format">XYZ Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#custom-file-formats">Custom File Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#input-file-parameters">Input File Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#converting-between-formats">Converting Between Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/force_fields.html">Force Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#lennard-jones-force-field">Lennard-Jones Force Field</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/force_fields.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/force_fields.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#machine-learning-potentials">Machine Learning Potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#combining-force-fields">Combining Force Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#custom-force-fields">Custom Force Fields</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/integrators.html">Integrators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#verlet-integrator">Verlet Integrator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/integrators.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/integrators.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#nve-ensemble">NVE Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#nvt-ensemble">NVT Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#custom-integrators">Custom Integrators</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/index.html#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/index.html#core-classes">Core Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference/core/md_simulation.html">MDSimulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#class-definition">Class Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#methods">Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#run">run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-xyz-trajectory">save_xyz_trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-energy-curve">save_energy_curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-temperature-curve">save_temperature_curve</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#example-usage">Example Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#properties">Properties</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#contents">Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#core-components">Core Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#atomreader">AtomReader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#force-fields">Force Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#integrators">Integrators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#mdmodel">MDModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#mdsimulator">MDSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#extension-points">Extension Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#pytorch-integration">PyTorch Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding_force_fields.html">Adding New Force Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#force-field-interface">Force Field Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#using-pytorch-autograd">Using PyTorch Autograd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#neighbor-lists">Neighbor Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#registering-your-force-field">Registering Your Force Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#example-simple-harmonic-potential">Example: Simple Harmonic Potential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#testing-your-force-field">Testing Your Force Field</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding_integrators.html">Adding New Integrators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#integrator-interface">Integrator Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#example-leap-frog-integrator">Example: Leap-Frog Integrator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#implementing-thermostats">Implementing Thermostats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#registering-your-integrator">Registering Your Integrator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#testing-your-integrator">Testing Your Integrator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ml_integration.html">Machine Learning Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#basic-integration">Basic Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#supported-model-types">Supported Model Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#creating-a-custom-ml-model">Creating a Custom ML Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#registering-your-model">Registering Your Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#training-ml-models">Training ML Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_integration.html#using-hybrid-potentials">Using Hybrid Potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Project Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#core-components">Core Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core">core/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io-utils">io_utils/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#machine-learning-potentials">machine_learning_potentials/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-scripts">run_scripts/</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-new-components">Adding New Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adding-a-new-force-field">Adding a New Force Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-a-new-integrator">Adding a New Integrator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-a-new-ml-model">Adding a New ML Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#coding-standards">Coding Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to TorchSim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#development-environment">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#project-structure">Project Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contribution-guidelines">Contribution Guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#pull-request-checklist">Pull Request Checklist</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#adding-new-features">Adding New Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#force-fields">Force Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#integrators">Integrators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#machine-learning-models">Machine Learning Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#reporting-bugs">Reporting Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#requesting-features">Requesting Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#code-of-conduct">Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#our-responsibilities">Our Responsibilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#testing-framework">Testing Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#writing-tests">Writing Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#test-file-structure">Test File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#test-categories">Test Categories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="testing.html#unit-tests">Unit Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing.html#integration-tests">Integration Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing.html#regression-tests">Regression Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#test-fixtures">Test Fixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#testing-gpu-code">Testing GPU Code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-data">Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#continuous-integration">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#code-coverage">Code Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#basic-examples">Basic Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#advanced-examples">Advanced Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#analysis-examples">Analysis Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#custom-extensions">Custom Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/lennard_jones_fluid.html">Lennard-Jones Fluid Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#complete-code">Complete Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#step-by-step-explanation">Step-by-Step Explanation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#setting-up-the-system">1. Setting Up the System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#initializing-torchsim-components">2. Initializing TorchSim Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#running-the-simulation">3. Running the Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#analyzing-the-results">4. Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#expected-results">Expected Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#variations">Variations</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TorchSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Project Structure</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/developer_guide/project_structure.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="project-structure">
+<h1>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading"></a></h1>
+<p>This document describes the overall structure of the TorchSim codebase, to help you understand how the different components are organized and how to add your own extensions.</p>
+<section id="directory-structure">
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>torchsim/
+├── core/                        # Core molecular dynamics engine
+│   ├── force/                   # Force field implementations
+│   │   ├── __init__.py
+│   │   ├── base_force.py        # Base class for all force fields
+│   │   ├── lennard_jones_force.py
+│   │   └── ...
+│   ├── integrator/              # Integrator implementations
+│   │   ├── __init__.py
+│   │   ├── base_integrator.py   # Base class for all integrators
+│   │   ├── integrator.py        # Verlet integrator implementation
+│   │   └── ...
+│   ├── neighbor_search/         # Neighbor search algorithms
+│   │   ├── __init__.py
+│   │   ├── neighbor_list.py     # Neighbor list implementation
+│   │   └── ...
+│   ├── __init__.py
+│   ├── md_model.py              # Model definitions
+│   ├── md_simulation.py         # Simulation controller
+│   ├── energy_minimizer.py      # Energy minimization tools
+│   ├── parameter_manager.py     # Parameter handling utilities
+│   └── element_info.py          # Element properties
+│
+├── io_utils/                    # Input/Output utilities
+│   ├── __init__.py
+│   ├── reader.py                # Structure file readers
+│   ├── writer.py                # Output file writers
+│   ├── file_converter.py        # File format converters
+│   └── ...
+│
+├── machine_learning_potentials/ # Machine learning potentials
+│   ├── model/                   # Neural network model architectures
+│   │   ├── __init__.py
+│   │   ├── base_model.py        # Base class for ML models
+│   │   └── ...
+│   ├── __init__.py
+│   └── machine_learning_force.py # ML force field implementation
+│
+├── graph_diffusion/             # Graph-based diffusion models
+│   ├── __init__.py
+│   └── ...
+│
+├── run_scripts/                 # Example run scripts
+│   ├── lj_run.py                # Lennard-Jones simulation script
+│   ├── lj_run.json              # Configuration for LJ simulation
+│   ├── mlps_run.py              # ML potential simulation script
+│   ├── mlps_run.json            # Configuration for ML simulation
+│   └── ...
+│
+├── __init__.py                  # Package initialization
+└── setup.py                     # Package installation script
+</pre></div>
+</div>
+</section>
+<section id="core-components">
+<h2>Core Components<a class="headerlink" href="#core-components" title="Link to this heading"></a></h2>
+<section id="core">
+<h3>core/<a class="headerlink" href="#core" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">core</span></code> directory contains the main molecular dynamics engine:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">force/</span></code>: Force field implementations</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">base_force.py</span></code>: Abstract base class for all force fields</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lennard_jones_force.py</span></code>: Lennard-Jones potential implementation</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integrator/</span></code>: Integrator implementations</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">base_integrator.py</span></code>: Abstract base class for all integrators</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integrator.py</span></code>: Velocity Verlet integrator with NVE/NVT support</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_search/</span></code>: Efficient algorithms for finding neighboring atoms</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_list.py</span></code>: Cell list implementation for neighbor search</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">md_model.py</span></code>: Model definitions that combine force fields and integrators</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code>: Standard MD model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SumBackboneInterface</span></code>: Combines multiple force fields</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">md_simulation.py</span></code>: Simulation controller that runs simulations and collects results</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">MDSimulator</span></code>: Main simulation class</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy_minimizer.py</span></code>: Tools for minimizing the energy of molecular structures</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">EnergyMinimizer</span></code>: Energy minimization algorithms</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameter_manager.py</span></code>: Utilities for handling simulation parameters</p></li>
+</ul>
+</section>
+<section id="io-utils">
+<h3>io_utils/<a class="headerlink" href="#io-utils" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">io_utils</span></code> directory contains tools for reading and writing data:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">reader.py</span></code>: Structure file readers</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">AtomFileReader</span></code>: Reads XYZ and other file formats</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">writer.py</span></code>: Output file writers</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">TrajectoryWriter</span></code>: Writes trajectory data in various formats</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file_converter.py</span></code>: Utilities for converting between different file formats</p></li>
+</ul>
+</section>
+<section id="machine-learning-potentials">
+<h3>machine_learning_potentials/<a class="headerlink" href="#machine-learning-potentials" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">machine_learning_potentials</span></code> directory contains machine learning-based force fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model/</span></code>: Neural network model architectures</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">base_model.py</span></code>: Base class for all ML models</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">machine_learning_force.py</span></code>: Implementation of ML-based force fields</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">MachineLearningForce</span></code>: Adapter for using ML models as force fields</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="run-scripts">
+<h3>run_scripts/<a class="headerlink" href="#run-scripts" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">run_scripts</span></code> directory contains example scripts and configurations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lj_run.py</span></code> / <code class="docutils literal notranslate"><span class="pre">lj_run.json</span></code>: Lennard-Jones simulation example</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mlps_run.py</span></code> / <code class="docutils literal notranslate"><span class="pre">mlps_run.json</span></code>: Machine learning potential example</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user_defined_run.py</span></code> / <code class="docutils literal notranslate"><span class="pre">user_defined_run.json</span></code>: Custom simulation example</p></li>
+</ul>
+</section>
+</section>
+<section id="adding-new-components">
+<h2>Adding New Components<a class="headerlink" href="#adding-new-components" title="Link to this heading"></a></h2>
+<section id="adding-a-new-force-field">
+<h3>Adding a New Force Field<a class="headerlink" href="#adding-a-new-force-field" title="Link to this heading"></a></h3>
+<ol class="simple">
+<li><p>Create a new file in <code class="docutils literal notranslate"><span class="pre">core/force/</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">my_force.py</span></code>)</p></li>
+<li><p>Implement your force field by extending <code class="docutils literal notranslate"><span class="pre">BaseForce</span></code></p></li>
+<li><p>Add your class to <code class="docutils literal notranslate"><span class="pre">core/force/__init__.py</span></code></p></li>
+</ol>
+</section>
+<section id="adding-a-new-integrator">
+<h3>Adding a New Integrator<a class="headerlink" href="#adding-a-new-integrator" title="Link to this heading"></a></h3>
+<ol class="simple">
+<li><p>Create a new file in <code class="docutils literal notranslate"><span class="pre">core/integrator/</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">my_integrator.py</span></code>)</p></li>
+<li><p>Implement your integrator by extending <code class="docutils literal notranslate"><span class="pre">BaseIntegrator</span></code></p></li>
+<li><p>Add your class to <code class="docutils literal notranslate"><span class="pre">core/integrator/__init__.py</span></code></p></li>
+</ol>
+</section>
+<section id="adding-a-new-ml-model">
+<h3>Adding a New ML Model<a class="headerlink" href="#adding-a-new-ml-model" title="Link to this heading"></a></h3>
+<ol class="simple">
+<li><p>Create a new file in <code class="docutils literal notranslate"><span class="pre">machine_learning_potentials/model/</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">my_model.py</span></code>)</p></li>
+<li><p>Implement your model by extending <code class="docutils literal notranslate"><span class="pre">BaseMLModel</span></code></p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">MachineLearningForce._load_model()</span></code> to support your model type</p></li>
+</ol>
+</section>
+</section>
+<section id="coding-standards">
+<h2>Coding Standards<a class="headerlink" href="#coding-standards" title="Link to this heading"></a></h2>
+<p>TorchSim follows these coding standards:</p>
+<ol class="simple">
+<li><p><strong>PEP 8</strong>: Follow Python style guidelines</p></li>
+<li><p><strong>Type Hints</strong>: Use type hints for function signatures</p></li>
+<li><p><strong>Docstrings</strong>: Use Google-style docstrings for all classes and functions</p></li>
+<li><p><strong>Unit Tests</strong>: Write tests for new functionality</p></li>
+<li><p><strong>Modularity</strong>: Keep components loosely coupled</p></li>
+<li><p><strong>Error Handling</strong>: Use appropriate error handling and validation</p></li>
+</ol>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>Tests are located in the <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory and can be run with pytest:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+<p>When adding new functionality, create corresponding tests in the appropriate test module.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ml_integration.html" class="btn btn-neutral float-left" title="Machine Learning Integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing to TorchSim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jin Zongxiao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

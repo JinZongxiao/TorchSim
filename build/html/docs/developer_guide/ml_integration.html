@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Machine Learning Integration &mdash; TorchSim v0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fa47ad08"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Project Structure" href="project_structure.html" />
+    <link rel="prev" title="Adding New Integrators" href="adding_integrators.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TorchSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">TorchSim Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#navigation">Navigation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#from-source">From Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#development-installation">Development Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#verifying-installation">Verifying Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#basic-lennard-jones-simulation">Basic Lennard-Jones Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#machine-learning-potential-simulation">Machine Learning Potential Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-configuration-files">Using Configuration Files</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/index.html#contents">Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/input_files.html">Input File Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#xyz-format">XYZ Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#custom-file-formats">Custom File Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#input-file-parameters">Input File Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#converting-between-formats">Converting Between Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/force_fields.html">Force Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#lennard-jones-force-field">Lennard-Jones Force Field</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/force_fields.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/force_fields.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#machine-learning-potentials">Machine Learning Potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#combining-force-fields">Combining Force Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#custom-force-fields">Custom Force Fields</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/integrators.html">Integrators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#verlet-integrator">Verlet Integrator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/integrators.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/integrators.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#nve-ensemble">NVE Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#nvt-ensemble">NVT Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#custom-integrators">Custom Integrators</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/index.html#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/index.html#core-classes">Core Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference/core/md_simulation.html">MDSimulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#class-definition">Class Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#methods">Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#run">run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-xyz-trajectory">save_xyz_trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-energy-curve">save_energy_curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-temperature-curve">save_temperature_curve</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#example-usage">Example Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#properties">Properties</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#contents">Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#core-components">Core Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#atomreader">AtomReader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#force-fields">Force Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#integrators">Integrators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#mdmodel">MDModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#mdsimulator">MDSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#extension-points">Extension Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#pytorch-integration">PyTorch Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding_force_fields.html">Adding New Force Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#force-field-interface">Force Field Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#using-pytorch-autograd">Using PyTorch Autograd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#neighbor-lists">Neighbor Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#registering-your-force-field">Registering Your Force Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#example-simple-harmonic-potential">Example: Simple Harmonic Potential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_force_fields.html#testing-your-force-field">Testing Your Force Field</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adding_integrators.html">Adding New Integrators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#integrator-interface">Integrator Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#example-leap-frog-integrator">Example: Leap-Frog Integrator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#implementing-thermostats">Implementing Thermostats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#registering-your-integrator">Registering Your Integrator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adding_integrators.html#testing-your-integrator">Testing Your Integrator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Machine Learning Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-integration">Basic Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-model-types">Supported Model Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-custom-ml-model">Creating a Custom ML Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#registering-your-model">Registering Your Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training-ml-models">Training ML Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-hybrid-potentials">Using Hybrid Potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="project_structure.html">Project Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#core-components">Core Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#core">core/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#io-utils">io_utils/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#machine-learning-potentials">machine_learning_potentials/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#run-scripts">run_scripts/</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#adding-new-components">Adding New Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#adding-a-new-force-field">Adding a New Force Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#adding-a-new-integrator">Adding a New Integrator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_structure.html#adding-a-new-ml-model">Adding a New ML Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#coding-standards">Coding Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to TorchSim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#development-environment">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#project-structure">Project Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contribution-guidelines">Contribution Guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#pull-request-checklist">Pull Request Checklist</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#adding-new-features">Adding New Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#force-fields">Force Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#integrators">Integrators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#machine-learning-models">Machine Learning Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#reporting-bugs">Reporting Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#requesting-features">Requesting Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#code-of-conduct">Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#our-responsibilities">Our Responsibilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#testing-framework">Testing Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#writing-tests">Writing Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#test-file-structure">Test File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#test-categories">Test Categories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="testing.html#unit-tests">Unit Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing.html#integration-tests">Integration Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing.html#regression-tests">Regression Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#test-fixtures">Test Fixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html#testing-gpu-code">Testing GPU Code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-data">Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#continuous-integration">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#code-coverage">Code Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#basic-examples">Basic Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#advanced-examples">Advanced Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#analysis-examples">Analysis Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html#custom-extensions">Custom Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/lennard_jones_fluid.html">Lennard-Jones Fluid Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#complete-code">Complete Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#step-by-step-explanation">Step-by-Step Explanation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#setting-up-the-system">1. Setting Up the System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#initializing-torchsim-components">2. Initializing TorchSim Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#running-the-simulation">3. Running the Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/lennard_jones_fluid.html#analyzing-the-results">4. Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#expected-results">Expected Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/lennard_jones_fluid.html#variations">Variations</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TorchSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Machine Learning Integration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/developer_guide/ml_integration.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="machine-learning-integration">
+<h1>Machine Learning Integration<a class="headerlink" href="#machine-learning-integration" title="Link to this heading"></a></h1>
+<p>This guide explains how to integrate machine learning models into TorchSim for use as potential energy functions.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>TorchSim supports the use of machine learning models as potential energy functions through the <code class="docutils literal notranslate"><span class="pre">MachineLearningForce</span></code> class. This allows you to:</p>
+<ol class="simple">
+<li><p>Use pre-trained neural network models for molecular dynamics simulations</p></li>
+<li><p>Combine traditional force fields with machine learning potentials</p></li>
+<li><p>Develop and test new machine learning architectures for molecular simulation</p></li>
+</ol>
+</section>
+<section id="basic-integration">
+<h2>Basic Integration<a class="headerlink" href="#basic-integration" title="Link to this heading"></a></h2>
+<p>To use a machine learning model as a force field:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchsim.machine_learning_potentials.machine_learning_force</span> <span class="kn">import</span> <span class="n">MachineLearningForce</span>
+<span class="kn">from</span> <span class="nn">torchsim.io_utils.reader</span> <span class="kn">import</span> <span class="n">AtomFileReader</span>
+
+<span class="n">atom_reader</span> <span class="o">=</span> <span class="n">AtomFileReader</span><span class="p">(</span><span class="s2">&quot;structure.xyz&quot;</span><span class="p">,</span> <span class="n">box_length</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+
+<span class="c1"># Initialize ML force with a pre-trained model</span>
+<span class="n">ml_force</span> <span class="o">=</span> <span class="n">MachineLearningForce</span><span class="p">(</span>
+    <span class="n">atom_reader</span><span class="p">,</span>
+    <span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;path/to/model.pt&quot;</span><span class="p">,</span>
+    <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;SchNet&quot;</span>  <span class="c1"># or other supported model type</span>
+<span class="p">)</span>
+
+<span class="c1"># Use it like any other force field</span>
+<span class="n">energy</span> <span class="o">=</span> <span class="n">ml_force</span><span class="o">.</span><span class="n">compute_energy</span><span class="p">(</span><span class="n">atom_reader</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+<span class="n">forces</span> <span class="o">=</span> <span class="n">ml_force</span><span class="o">.</span><span class="n">compute_forces</span><span class="p">(</span><span class="n">atom_reader</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="supported-model-types">
+<h2>Supported Model Types<a class="headerlink" href="#supported-model-types" title="Link to this heading"></a></h2>
+<p>TorchSim currently supports several types of machine learning models:</p>
+<ol class="simple">
+<li><p><strong>SchNet</strong>: Graph neural network for molecular properties</p></li>
+<li><p><strong>PhysNet</strong>: Physics-inspired neural network potential</p></li>
+<li><p><strong>Custom</strong>: User-defined models that follow the required interface</p></li>
+</ol>
+</section>
+<section id="creating-a-custom-ml-model">
+<h2>Creating a Custom ML Model<a class="headerlink" href="#creating-a-custom-ml-model" title="Link to this heading"></a></h2>
+<p>To create a custom machine learning model for use with TorchSim:</p>
+<ol class="simple">
+<li><p>Create a new class in <code class="docutils literal notranslate"><span class="pre">torchsim/machine_learning_potentials/model/</span></code></p></li>
+<li><p>Implement the required interface methods</p></li>
+<li><p>Register your model type in <code class="docutils literal notranslate"><span class="pre">MachineLearningForce</span></code></p></li>
+</ol>
+<p>Here’s an example of a simple custom model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">torchsim.machine_learning_potentials.model.base_model</span> <span class="kn">import</span> <span class="n">BaseMLModel</span>
+
+<span class="k">class</span> <span class="nc">SimpleMLModel</span><span class="p">(</span><span class="n">BaseMLModel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_atom_types</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">5.0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span> <span class="o">=</span> <span class="n">cutoff</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_atom_types</span> <span class="o">=</span> <span class="n">n_atom_types</span>
+        
+        <span class="c1"># Define your neural network layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">n_atom_types</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>  <span class="c1"># atom features + distance</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">SiLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">SiLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">atom_types</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Forward pass to compute energy.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        -----------</span>
+<span class="sd">        positions : torch.Tensor</span>
+<span class="sd">            Atomic positions with shape (n_atoms, 3)</span>
+<span class="sd">        atom_types : torch.Tensor</span>
+<span class="sd">            Atom type indices with shape (n_atoms,)</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">        --------</span>
+<span class="sd">        torch.Tensor</span>
+<span class="sd">            Scalar tensor containing the potential energy</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_atoms</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">device</span>
+        
+        <span class="c1"># Embed atom types</span>
+        <span class="n">atom_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">atom_types</span><span class="p">)</span>
+        
+        <span class="c1"># Compute pairwise interactions</span>
+        <span class="n">energy</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_atoms</span><span class="p">):</span>
+                <span class="c1"># Calculate distance</span>
+                <span class="n">r_ij</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                
+                <span class="c1"># Skip if beyond cutoff</span>
+                <span class="k">if</span> <span class="n">r_ij</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                    
+                <span class="c1"># Combine atom features and distance</span>
+                <span class="n">features_i</span> <span class="o">=</span> <span class="n">atom_features</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">features_j</span> <span class="o">=</span> <span class="n">atom_features</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">pair_input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">features_i</span><span class="p">,</span> <span class="n">features_j</span><span class="p">,</span> <span class="n">r_ij</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)])</span>
+                
+                <span class="c1"># Compute pair energy contribution</span>
+                <span class="n">pair_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="p">(</span><span class="n">pair_input</span><span class="p">)</span>
+                <span class="n">energy</span> <span class="o">+=</span> <span class="n">pair_energy</span>
+                
+        <span class="k">return</span> <span class="n">energy</span>
+</pre></div>
+</div>
+</section>
+<section id="registering-your-model">
+<h2>Registering Your Model<a class="headerlink" href="#registering-your-model" title="Link to this heading"></a></h2>
+<p>To register your custom model with the <code class="docutils literal notranslate"><span class="pre">MachineLearningForce</span></code> class:</p>
+<ol class="simple">
+<li><p>Add your model class to the appropriate module</p></li>
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">_load_model</span></code> method in <code class="docutils literal notranslate"><span class="pre">MachineLearningForce</span></code>:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_load_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">model_type</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;SchNet&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">torchsim.machine_learning_potentials.model.schnet</span> <span class="kn">import</span> <span class="n">SchNet</span>
+        <span class="k">return</span> <span class="n">SchNet</span><span class="o">.</span><span class="n">load_from_checkpoint</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;PhysNet&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">torchsim.machine_learning_potentials.model.physnet</span> <span class="kn">import</span> <span class="n">PhysNet</span>
+        <span class="k">return</span> <span class="n">PhysNet</span><span class="o">.</span><span class="n">load_from_checkpoint</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;SimpleML&quot;</span><span class="p">:</span>  <span class="c1"># Your custom model</span>
+        <span class="kn">from</span> <span class="nn">torchsim.machine_learning_potentials.model.simple_ml</span> <span class="kn">import</span> <span class="n">SimpleMLModel</span>
+        <span class="k">return</span> <span class="n">SimpleMLModel</span><span class="o">.</span><span class="n">load_from_checkpoint</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown model type: </span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="training-ml-models">
+<h2>Training ML Models<a class="headerlink" href="#training-ml-models" title="Link to this heading"></a></h2>
+<p>TorchSim doesn’t directly provide training functionality, but you can use PyTorch Lightning or other frameworks to train your models:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">pytorch_lightning</span> <span class="k">as</span> <span class="nn">pl</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">torchsim.machine_learning_potentials.model.simple_ml</span> <span class="kn">import</span> <span class="n">SimpleMLModel</span>
+
+<span class="c1"># Define a PyTorch Lightning module for training</span>
+<span class="k">class</span> <span class="nc">MLTrainer</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">LightningModule</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">atom_types</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">atom_types</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">training_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">):</span>
+        <span class="n">positions</span><span class="p">,</span> <span class="n">atom_types</span><span class="p">,</span> <span class="n">target_energy</span><span class="p">,</span> <span class="n">target_forces</span> <span class="o">=</span> <span class="n">batch</span>
+        
+        <span class="c1"># Forward pass with gradient tracking</span>
+        <span class="n">positions</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">atom_types</span><span class="p">)</span>
+        
+        <span class="c1"># Compute forces as negative gradient of energy</span>
+        <span class="n">forces</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">create_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="c1"># Compute losses</span>
+        <span class="n">energy_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">target_energy</span><span class="p">)</span>
+        <span class="n">forces_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="n">target_forces</span><span class="p">)</span>
+        
+        <span class="c1"># Combined loss</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">energy_loss</span> <span class="o">+</span> <span class="n">forces_loss</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;train_loss&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">loss</span>
+        
+    <span class="k">def</span> <span class="nf">configure_optimizers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+
+<span class="c1"># Create and train the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">SimpleMLModel</span><span class="p">(</span><span class="n">n_atom_types</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">MLTrainer</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Train the model (assuming you have a DataLoader)</span>
+<span class="n">pl_trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">max_epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">pl_trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">train_dataloader</span><span class="p">)</span>
+
+<span class="c1"># Save the trained model</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">&quot;trained_simple_ml.pt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="using-hybrid-potentials">
+<h2>Using Hybrid Potentials<a class="headerlink" href="#using-hybrid-potentials" title="Link to this heading"></a></h2>
+<p>You can combine traditional force fields with machine learning potentials using the <code class="docutils literal notranslate"><span class="pre">SumBackboneInterface</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchsim.core.md_model</span> <span class="kn">import</span> <span class="n">SumBackboneInterface</span>
+<span class="kn">from</span> <span class="nn">torchsim.core.force.lennard_jones_force</span> <span class="kn">import</span> <span class="n">LennardJonesForce</span>
+
+<span class="c1"># Create both force fields</span>
+<span class="n">lj_force</span> <span class="o">=</span> <span class="n">LennardJonesForce</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">)</span>
+<span class="n">ml_force</span> <span class="o">=</span> <span class="n">MachineLearningForce</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;model.pt&quot;</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;SchNet&quot;</span><span class="p">)</span>
+
+<span class="c1"># Combine them</span>
+<span class="n">force_backbone</span> <span class="o">=</span> <span class="n">SumBackboneInterface</span><span class="p">([</span><span class="n">lj_force</span><span class="p">,</span> <span class="n">ml_force</span><span class="p">],</span> <span class="n">atom_reader</span><span class="p">)</span>
+
+<span class="c1"># Use in simulation</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">VerletIntegrator</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">force_field</span><span class="o">=</span><span class="n">force_backbone</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This allows you to leverage the strengths of both approaches: the physical accuracy of traditional potentials and the flexibility of machine learning models.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="adding_integrators.html" class="btn btn-neutral float-left" title="Adding New Integrators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="project_structure.html" class="btn btn-neutral float-right" title="Project Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jin Zongxiao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

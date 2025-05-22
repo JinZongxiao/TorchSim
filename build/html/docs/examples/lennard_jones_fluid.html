@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lennard-Jones Fluid Example &mdash; TorchSim v0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=fa47ad08"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Examples" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TorchSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">TorchSim Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#navigation">Navigation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#from-pypi">From PyPI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#from-source">From Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#development-installation">Development Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#verifying-installation">Verifying Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#basic-lennard-jones-simulation">Basic Lennard-Jones Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#machine-learning-potential-simulation">Machine Learning Potential Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#using-configuration-files">Using Configuration Files</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/index.html#contents">Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/input_files.html">Input File Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#xyz-format">XYZ Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#custom-file-formats">Custom File Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#input-file-parameters">Input File Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/input_files.html#converting-between-formats">Converting Between Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/force_fields.html">Force Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#lennard-jones-force-field">Lennard-Jones Force Field</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/force_fields.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/force_fields.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#machine-learning-potentials">Machine Learning Potentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#combining-force-fields">Combining Force Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/force_fields.html#custom-force-fields">Custom Force Fields</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/integrators.html">Integrators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#verlet-integrator">Verlet Integrator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/integrators.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../user_guide/integrators.html#parameters">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#nve-ensemble">NVE Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#nvt-ensemble">NVT Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user_guide/integrators.html#custom-integrators">Custom Integrators</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/index.html#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/index.html#core-classes">Core Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference/core/md_simulation.html">MDSimulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#class-definition">Class Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#methods">Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#run">run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-xyz-trajectory">save_xyz_trajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-energy-curve">save_energy_curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api_reference/core/md_simulation.html#save-temperature-curve">save_temperature_curve</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#example-usage">Example Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_reference/core/md_simulation.html#properties">Properties</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/index.html">Developer Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/index.html#contents">Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/architecture.html#core-components">Core Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/architecture.html#atomreader">AtomReader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/architecture.html#force-fields">Force Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/architecture.html#integrators">Integrators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/architecture.html#mdmodel">MDModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/architecture.html#mdsimulator">MDSimulator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/architecture.html#data-flow">Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/architecture.html#extension-points">Extension Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/architecture.html#pytorch-integration">PyTorch Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/adding_force_fields.html">Adding New Force Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_force_fields.html#force-field-interface">Force Field Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_force_fields.html#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_force_fields.html#using-pytorch-autograd">Using PyTorch Autograd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_force_fields.html#neighbor-lists">Neighbor Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_force_fields.html#registering-your-force-field">Registering Your Force Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_force_fields.html#example-simple-harmonic-potential">Example: Simple Harmonic Potential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_force_fields.html#testing-your-force-field">Testing Your Force Field</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/adding_integrators.html">Adding New Integrators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_integrators.html#integrator-interface">Integrator Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_integrators.html#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_integrators.html#example-leap-frog-integrator">Example: Leap-Frog Integrator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_integrators.html#implementing-thermostats">Implementing Thermostats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_integrators.html#registering-your-integrator">Registering Your Integrator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/adding_integrators.html#testing-your-integrator">Testing Your Integrator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/ml_integration.html">Machine Learning Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/ml_integration.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/ml_integration.html#basic-integration">Basic Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/ml_integration.html#supported-model-types">Supported Model Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/ml_integration.html#creating-a-custom-ml-model">Creating a Custom ML Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/ml_integration.html#registering-your-model">Registering Your Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/ml_integration.html#training-ml-models">Training ML Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/ml_integration.html#using-hybrid-potentials">Using Hybrid Potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/project_structure.html">Project Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/project_structure.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/project_structure.html#core-components">Core Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/project_structure.html#core">core/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/project_structure.html#io-utils">io_utils/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/project_structure.html#machine-learning-potentials">machine_learning_potentials/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/project_structure.html#run-scripts">run_scripts/</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/project_structure.html#adding-new-components">Adding New Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/project_structure.html#adding-a-new-force-field">Adding a New Force Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/project_structure.html#adding-a-new-integrator">Adding a New Integrator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/project_structure.html#adding-a-new-ml-model">Adding a New ML Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/project_structure.html#coding-standards">Coding Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/project_structure.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/contributing.html">Contributing to TorchSim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/contributing.html#development-environment">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/contributing.html#project-structure">Project Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/contributing.html#contribution-guidelines">Contribution Guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/contributing.html#pull-request-checklist">Pull Request Checklist</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/contributing.html#adding-new-features">Adding New Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/contributing.html#force-fields">Force Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/contributing.html#integrators">Integrators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/contributing.html#machine-learning-models">Machine Learning Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/contributing.html#reporting-bugs">Reporting Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/contributing.html#requesting-features">Requesting Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/contributing.html#code-of-conduct">Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/contributing.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/contributing.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/contributing.html#our-responsibilities">Our Responsibilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/contributing.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/testing.html#testing-framework">Testing Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/testing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/testing.html#writing-tests">Writing Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/testing.html#test-file-structure">Test File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/testing.html#test-categories">Test Categories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../developer_guide/testing.html#unit-tests">Unit Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developer_guide/testing.html#integration-tests">Integration Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../developer_guide/testing.html#regression-tests">Regression Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/testing.html#test-fixtures">Test Fixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../developer_guide/testing.html#testing-gpu-code">Testing GPU Code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/testing.html#test-data">Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/testing.html#continuous-integration">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/testing.html#code-coverage">Code Coverage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#basic-examples">Basic Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#advanced-examples">Advanced Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#analysis-examples">Analysis Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#custom-extensions">Custom Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Lennard-Jones Fluid Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#complete-code">Complete Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-by-step-explanation">Step-by-Step Explanation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-the-system">1. Setting Up the System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initializing-torchsim-components">2. Initializing TorchSim Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-simulation">3. Running the Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#analyzing-the-results">4. Analyzing the Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#expected-results">Expected Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variations">Variations</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TorchSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Lennard-Jones Fluid Example</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/examples/lennard_jones_fluid.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lennard-jones-fluid-example">
+<h1>Lennard-Jones Fluid Example<a class="headerlink" href="#lennard-jones-fluid-example" title="Link to this heading"></a></h1>
+<p>This example demonstrates how to simulate a simple Lennard-Jones fluid using TorchSim.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The Lennard-Jones potential is a simple mathematical model that approximates the interaction between neutral atoms or molecules. It’s commonly used to simulate noble gases like argon.</p>
+<p>In this example, we’ll:</p>
+<ol class="simple">
+<li><p>Set up a system of 100 particles</p></li>
+<li><p>Run a molecular dynamics simulation</p></li>
+<li><p>Visualize the results</p></li>
+</ol>
+</section>
+<section id="complete-code">
+<h2>Complete Code<a class="headerlink" href="#complete-code" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">torchsim.io_utils.reader</span> <span class="kn">import</span> <span class="n">AtomFileReader</span>
+<span class="kn">from</span> <span class="nn">torchsim.core.force.lennard_jones_force</span> <span class="kn">import</span> <span class="n">LennardJonesForce</span>
+<span class="kn">from</span> <span class="nn">torchsim.core.integrator.integrator</span> <span class="kn">import</span> <span class="n">VerletIntegrator</span>
+<span class="kn">from</span> <span class="nn">torchsim.core.md_model</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">SumBackboneInterface</span>
+<span class="kn">from</span> <span class="nn">torchsim.core.md_simulation</span> <span class="kn">import</span> <span class="n">MDSimulator</span>
+
+<span class="c1"># Create a random initial configuration of 100 particles in a box</span>
+<span class="k">def</span> <span class="nf">create_random_xyz</span><span class="p">(</span><span class="n">num_particles</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">box_length</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;lj_fluid.xyz&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num_particles</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Lennard-Jones fluid</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_particles</span><span class="p">):</span>
+            <span class="c1"># Random position within the box</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">box_length</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">box_length</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">box_length</span><span class="p">)</span>
+            
+            <span class="c1"># All particles are of type &#39;Ar&#39; (argon)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ar </span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">y</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">z</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="c1"># Create the input file</span>
+<span class="n">input_file</span> <span class="o">=</span> <span class="n">create_random_xyz</span><span class="p">(</span><span class="n">num_particles</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">box_length</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+
+<span class="c1"># Read the structure data</span>
+<span class="n">box_length</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">cutoff</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">atom_reader</span> <span class="o">=</span> <span class="n">AtomFileReader</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">box_length</span><span class="o">=</span><span class="n">box_length</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">cutoff</span><span class="p">)</span>
+
+<span class="c1"># Set up force field</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.1</span>    <span class="c1"># Energy parameter in kcal/mol</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">3.4</span>      <span class="c1"># Distance parameter in Angstroms</span>
+<span class="n">lj_force</span> <span class="o">=</span> <span class="n">LennardJonesForce</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+<span class="n">force_backbone</span> <span class="o">=</span> <span class="n">SumBackboneInterface</span><span class="p">([</span><span class="n">lj_force</span><span class="p">],</span> <span class="n">atom_reader</span><span class="p">)</span>
+
+<span class="c1"># Set up integrator</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.001</span>  <span class="c1"># Time step in picoseconds</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="mf">100.0</span>  <span class="c1"># Temperature in Kelvin</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.1</span>   <span class="c1"># Friction coefficient for Langevin thermostat</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">VerletIntegrator</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">,</span> 
+                             <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
+                             <span class="n">force_field</span><span class="o">=</span><span class="n">lj_force</span><span class="p">,</span>
+                             <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;NVT&#39;</span><span class="p">,</span>
+                             <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+                             <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">)</span>
+
+<span class="c1"># Create model and simulator</span>
+<span class="n">md_model</span> <span class="o">=</span> <span class="n">BaseModel</span><span class="p">(</span><span class="n">force_backbone</span><span class="p">,</span> <span class="n">integrator</span><span class="p">,</span> <span class="n">atom_reader</span><span class="p">)</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">print_interval</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">MDSimulator</span><span class="p">(</span><span class="n">md_model</span><span class="p">,</span> <span class="n">num_steps</span><span class="o">=</span><span class="n">num_steps</span><span class="p">,</span> <span class="n">print_interval</span><span class="o">=</span><span class="n">print_interval</span><span class="p">)</span>
+
+<span class="c1"># Run simulation</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running simulation with </span><span class="si">{</span><span class="n">num_steps</span><span class="si">}</span><span class="s2"> steps...&quot;</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Save the trajectory and energy curve</span>
+<span class="n">output_prefix</span> <span class="o">=</span> <span class="s2">&quot;lj_fluid&quot;</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">save_xyz_trajectory</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_prefix</span><span class="si">}</span><span class="s2">_trajectory.xyz&quot;</span><span class="p">,</span> <span class="n">atom_types</span><span class="o">=</span><span class="n">atom_reader</span><span class="o">.</span><span class="n">atom_types</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">save_energy_curve</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_prefix</span><span class="si">}</span><span class="s2">_energy.png&quot;</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">save_temperature_curve</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_prefix</span><span class="si">}</span><span class="s2">_temperature.png&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot the radial distribution function</span>
+<span class="k">def</span> <span class="nf">compute_rdf</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">box_length</span><span class="p">,</span> <span class="n">num_bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">r_max</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">r_max</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">r_max</span> <span class="o">=</span> <span class="n">box_length</span> <span class="o">/</span> <span class="mi">2</span>
+    
+    <span class="n">n_atoms</span> <span class="o">=</span> <span class="n">positions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">r_edges</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">num_bins</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">positions</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">r_centers</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">r_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">r_edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">dr</span> <span class="o">=</span> <span class="n">r_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">r_edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Initialize histogram</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_bins</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">positions</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    
+    <span class="c1"># Loop over all atom pairs</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_atoms</span><span class="p">):</span>
+            <span class="c1"># Calculate minimum image distance</span>
+            <span class="n">rij</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">rij</span> <span class="o">=</span> <span class="n">rij</span> <span class="o">-</span> <span class="n">box_length</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">rij</span> <span class="o">/</span> <span class="n">box_length</span><span class="p">)</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">rij</span><span class="p">)</span>
+            
+            <span class="c1"># Add to histogram if within range</span>
+            <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">r_max</span><span class="p">:</span>
+                <span class="n">bin_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dist</span> <span class="o">/</span> <span class="n">dr</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">bin_idx</span> <span class="o">&lt;</span> <span class="n">num_bins</span><span class="p">:</span>
+                    <span class="n">hist</span><span class="p">[</span><span class="n">bin_idx</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span>  <span class="c1"># Count each pair twice</span>
+    
+    <span class="c1"># Normalize by ideal gas RDF</span>
+    <span class="n">volume</span> <span class="o">=</span> <span class="n">box_length</span><span class="o">**</span><span class="mi">3</span>
+    <span class="n">density</span> <span class="o">=</span> <span class="n">n_atoms</span> <span class="o">/</span> <span class="n">volume</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r_centers</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dr</span> <span class="o">*</span> <span class="n">density</span> <span class="o">*</span> <span class="n">n_atoms</span>
+    <span class="n">rdf</span> <span class="o">=</span> <span class="n">hist</span> <span class="o">/</span> <span class="n">norm</span>
+    
+    <span class="k">return</span> <span class="n">r_centers</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">rdf</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+<span class="c1"># Compute RDF from the last snapshot</span>
+<span class="n">final_positions</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;trajectory&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">g_r</span> <span class="o">=</span> <span class="n">compute_rdf</span><span class="p">(</span><span class="n">final_positions</span><span class="p">,</span> <span class="n">box_length</span><span class="p">)</span>
+
+<span class="c1"># Plot RDF</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g_r</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;r (Å)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;g(r)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Radial Distribution Function&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_prefix</span><span class="si">}</span><span class="s2">_rdf.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulation completed. Results saved with prefix &#39;</span><span class="si">{</span><span class="n">output_prefix</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-by-step-explanation">
+<h2>Step-by-Step Explanation<a class="headerlink" href="#step-by-step-explanation" title="Link to this heading"></a></h2>
+<section id="setting-up-the-system">
+<h3>1. Setting Up the System<a class="headerlink" href="#setting-up-the-system" title="Link to this heading"></a></h3>
+<p>First, we create a random initial configuration of particles:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_random_xyz</span><span class="p">(</span><span class="n">num_particles</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">box_length</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;lj_fluid.xyz&quot;</span><span class="p">):</span>
+    <span class="c1"># ... (function body as shown above)</span>
+</pre></div>
+</div>
+<p>This function generates a random distribution of particles within a cubic box and saves it in XYZ format.</p>
+</section>
+<section id="initializing-torchsim-components">
+<h3>2. Initializing TorchSim Components<a class="headerlink" href="#initializing-torchsim-components" title="Link to this heading"></a></h3>
+<p>We then set up the simulation components:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the structure data</span>
+<span class="n">atom_reader</span> <span class="o">=</span> <span class="n">AtomFileReader</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">box_length</span><span class="o">=</span><span class="n">box_length</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">cutoff</span><span class="p">)</span>
+
+<span class="c1"># Set up force field</span>
+<span class="n">lj_force</span> <span class="o">=</span> <span class="n">LennardJonesForce</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+
+<span class="c1"># Set up integrator with Langevin thermostat (NVT ensemble)</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">VerletIntegrator</span><span class="p">(</span><span class="n">atom_reader</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">force_field</span><span class="o">=</span><span class="n">lj_force</span><span class="p">,</span>
+                             <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;NVT&#39;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="running-the-simulation">
+<h3>3. Running the Simulation<a class="headerlink" href="#running-the-simulation" title="Link to this heading"></a></h3>
+<p>With all components set up, we create the model and simulator, then run the simulation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">md_model</span> <span class="o">=</span> <span class="n">BaseModel</span><span class="p">(</span><span class="n">force_backbone</span><span class="p">,</span> <span class="n">integrator</span><span class="p">,</span> <span class="n">atom_reader</span><span class="p">)</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">MDSimulator</span><span class="p">(</span><span class="n">md_model</span><span class="p">,</span> <span class="n">num_steps</span><span class="o">=</span><span class="n">num_steps</span><span class="p">,</span> <span class="n">print_interval</span><span class="o">=</span><span class="n">print_interval</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="analyzing-the-results">
+<h3>4. Analyzing the Results<a class="headerlink" href="#analyzing-the-results" title="Link to this heading"></a></h3>
+<p>After the simulation, we save the trajectory and analyze the results:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save trajectory and energy/temperature curves</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">save_xyz_trajectory</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_prefix</span><span class="si">}</span><span class="s2">_trajectory.xyz&quot;</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">save_energy_curve</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_prefix</span><span class="si">}</span><span class="s2">_energy.png&quot;</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">save_temperature_curve</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_prefix</span><span class="si">}</span><span class="s2">_temperature.png&quot;</span><span class="p">)</span>
+
+<span class="c1"># Calculate and plot the radial distribution function</span>
+<span class="c1"># ... (RDF calculation and plotting code)</span>
+</pre></div>
+</div>
+<p>The radial distribution function (RDF) shows the local structure of the fluid by measuring how the particle density varies as a function of distance from a reference particle.</p>
+</section>
+</section>
+<section id="expected-results">
+<h2>Expected Results<a class="headerlink" href="#expected-results" title="Link to this heading"></a></h2>
+<p>After running this simulation, you should see:</p>
+<ol class="simple">
+<li><p><strong>Energy Curve</strong>: The potential energy should decrease and stabilize as the system equilibrates</p></li>
+<li><p><strong>Temperature Curve</strong>: The temperature should fluctuate around the target value (100K)</p></li>
+<li><p><strong>Radial Distribution Function</strong>: Should show characteristic peaks corresponding to the shells of neighboring particles</p></li>
+</ol>
+</section>
+<section id="variations">
+<h2>Variations<a class="headerlink" href="#variations" title="Link to this heading"></a></h2>
+<p>You can modify this example to explore different aspects of Lennard-Jones fluids:</p>
+<ul class="simple">
+<li><p>Change the temperature to observe phase transitions</p></li>
+<li><p>Modify the density by changing the box size or number of particles</p></li>
+<li><p>Adjust the Lennard-Jones parameters (epsilon and sigma) to model different substances</p></li>
+<li><p>Use different ensembles (NVE instead of NVT) by changing the integrator configuration</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Jin Zongxiao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
