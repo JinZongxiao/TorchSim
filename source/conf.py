@@ -21,7 +21,6 @@ extensions = [
     'sphinx.ext.viewcode',
 ]
 
-# 配置 Markdown 支持
 source_suffix = {
     '.rst': 'restructuredtext',
     '.md': 'markdown',
@@ -37,7 +36,6 @@ exclude_patterns = []
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
-# 确保导航在所有页面显示
 html_theme_options = {
     'navigation_depth': 4,
     'collapse_navigation': False,
@@ -46,5 +44,4 @@ html_theme_options = {
     'titles_only': False,
 }
 
-# 设置主页和主目录
 master_doc = 'index'
