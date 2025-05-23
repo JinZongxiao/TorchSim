@@ -122,12 +122,5 @@ torchsim/
 
 ## Cite
 ```
-@software{TorchSim,
-  author = {Author Name},
-  title = {TorchSim: Hybrid MD Simulator},
-  year = {2023},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/JinZongxiao/torchsim}}
-}
+Should cite the article once it published :>
 ```
